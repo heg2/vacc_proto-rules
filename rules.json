@@ -1,0 +1,14 @@
+{
+	condition: 'v268_completed',
+	factName: 'measles_completed',
+	factValue: true,
+	priority: 10,
+	description: 'The patient has his MMR-II measles vaccine completed'
+},
+{
+	condition: 'NOT v683_completed',
+	factName: 'fsme_not_completed',
+	factValue: true,
+	priority: 10,
+	description: 'The patient has his FSME-IMMUN 0.25 ML JUNIOR vaccine NOT completed'
+}
