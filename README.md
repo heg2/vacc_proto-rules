@@ -13,7 +13,7 @@ Es stehen folgende Fakten zur Verfügung:
 | dXXX_number_of_doses| integer, NULL | Wurde die Impfung zur Zielerkrankung komplettisiert? |
 | rXXX | "TRUE", "FALSE" | Trifft das Risiko für den\*die Patient\*in zu? |
 
-
+`vXXX` steht für Impfungen, wobei XXX durch den Wert des coding.code erstetzt werden muss. Analog für dXXX für Zielerkrankungen und rXXX für Risiken.
 
 ### Regeln
 Wie die Regeln aufgebaut sein können, ist bei [stugna-es](https://www.npmjs.com/package/stugna-es#ruleadd) dokumentiert.
@@ -47,5 +47,8 @@ interface rule
   }
 ```
 
-*Vorsicht:* Fehlende Fakten werden per default als "TRUE" angenommen. Möchte man das nicht, muss man in der Regel den Parameter `missing: "FALSE"` setzen.
+*Vorsicht:* 
+- Fehlende Fakten werden per default als "TRUE" angenommen. Möchte man das nicht, muss man in der Regel den Parameter `missing: "FALSE"` setzen.
+- Abgekürzte Schreibweisen gehen nicht: `fact1 OR fact2` ist nicht das selbe wie `fact1 = TRUE OR fact2 = TRUE`.
 
+Konvention für "Helferfakten", die nicht im Endergebnis aufscheinen sollen: Deren Faktnamen beginnen mit einem `_`, und werden so bei der Anzeige ausgefiltert.

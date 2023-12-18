@@ -35,36 +35,36 @@
 	},
 	{
 		"condition": "age >= 8 AND age <= 15",
-		"factName": "is_teenager_tetanus",
+		"factName": "_is_teenager_tetanus",
 		"factValue": true,
-		"factNameElse": "is_teenager_tetanus",
+		"factNameElse": "_is_teenager_tetanus",
 		"factValueElse": false,
 		"priority": 5,
 		"description": "Persons from 8 to 15 years are considered teenagers in the Tetanus scenario"
 	},
 	{
 		"condition": "age >= 16 AND age <= 25",
-		"factName": "is_young_adult_tetanus",
+		"factName": "_is_young_adult_tetanus",
 		"factValue": true,
 		"priority": 5,
 		"description": "Persons from 16 to 25 years are considered adults in the Tetanus scenario"
 	},
 	{
 		"condition": "age >= 64",
-		"factName": "is_senior_tetanus",
+		"factName": "_is_senior_tetanus",
 		"factValue": true,
 		"priority": 5,
 		"description": "Persons older than 64 years are considered senior in the Tetanus scenario"
 	},
 	{
-		"condition": "is_teenager_tetanus AND d76902006_last_dose > 1825 OR is_young_adult_tetanus AND d76902006_last_dose > 3650 OR is_adult_tetanus AND d76902006_last_dose > 7300 OR is_senior_tetanus AND d76902006_last_dose > 3650",
+		"condition": "_is_teenager_tetanus AND d76902006_last_dose > 1825 OR _is_young_adult_tetanus AND d76902006_last_dose > 3650 OR _is_adult_tetanus AND d76902006_last_dose > 7300 OR _is_senior_tetanus AND d76902006_last_dose > 3650",
 		"factName": "tetanus_refresh_light_injury",
 		"factValue": true,
 		"priority": 10,
 		"description": "Refreshing the tetanus vaccination is indicated if the Patient has a light injury."
 	},
 	{
-		"condition": "(is_teenager_tetanus = TRUE OR is_young_adult_tetanus = TRUE OR is_senior_tetanus = TRUE) AND d76902006_last_dose > 1825 OR is_adult_tetanus = TRUE AND d76902006_last_dose > 3650",
+		"condition": "(_is_teenager_tetanus = TRUE OR _is_young_adult_tetanus = TRUE OR _is_senior_tetanus = TRUE) AND d76902006_last_dose > 1825 OR _is_adult_tetanus = TRUE AND d76902006_last_dose > 3650",
 		"factName": "tetanus_refresh_severe_injury",
 		"missing": "FALSE",
 		"factValue": true,
@@ -74,7 +74,7 @@
 	{
 		"condition": "d76902006_last_dose = 'NULL' AND age >= 5",
 		"missing": "NULL",
-		"factName": "tetanus_needed_injury",
+		"factName": "tetanus_necessary_injury",
 		"factValue": true,
 		"priority": 10,
 		"description": "The patient does not have any tetanus vaccination, consider vaccinating if they are injured."
@@ -85,7 +85,7 @@
 	{
 		"condition": "r56265001 = TRUE OR r19829001 = TRUE OR r235856003 = TRUE OR r51244008 = TRUE OR r90708001 = TRUE OR r75934005 = TRUE OR r737294004 = TRUE OR r414029004 = TRUE OR r77386006 = TRUE",
 		"missing": "FALSE",
-		"factName": "influenza_chronical",
+		"factName": "_influenza_chronical",
 		"factValue": true,
 		"priority": 5,
 		"description": "The patient has one or more of the chronical conditions that are risk factors for influenza."
@@ -93,7 +93,7 @@
 	{
 		"condition": "r223366009 = TRUE OR r77386006 = TRUE OR r61254738003 = TRUE",
 		"missing": "FALSE",
-		"factName": "influenza_exposition",
+		"factName": "_influenza_exposition",
 		"factValue": true,
 		"priority": 5,
 		"description": "The patient a higher risk of exposition to influenza."
@@ -101,7 +101,7 @@
 	{
 		"condition": "d719590007_last_dose = 'NULL' OR d719590007_last_dose > 365",
 		"missing": "NULL",
-		"factName": "influenza_expired",
+		"factName": "_influenza_expired",
 		"factValue": true,
 		"factNameElse": "influenza_expired",
 		"factValueElse": false,
@@ -109,11 +109,70 @@
 		"description": "The last INFLUENCA vaccination was more than a year ago."
 	},
 	{
-		"condition": "influenza_expired = TRUE AND (age >= 65 OR influenza_exposition = TRUE OR influenza_chronical = TRUE)",
+		"condition": "_influenza_expired = TRUE AND (age >= 65 OR _influenza_exposition = TRUE OR _influenza_chronical = TRUE)",
 		"missing": "FALSE",
-		"factName": "influenza_exposition",
+		"factName": "influenza_necessary",
 		"factValue": true,
 		"priority": 10,
 		"description": "For this patient, an INFLUENCA vaccination is recommended, and the last shot was more than a year ago."
+	},
+	{
+		"_comment": "Section for Streptococcus pneumoniae."
+	},
+	{
+		"condition": "age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE",
+		"missing": "FALSE",
+		"factName": "_sp_necessary_adult",
+		"factValue": true,
+		"priority": 4,
+		"description": "Vaccination against Streptococcus pneumoniae is recommended for risks of liver, immune, metabolism, spleen or blood diseases and for patients with skull fracture or cochloear implant."
+	},
+	{
+		"condition": "_sp_necessary_adult = NOT TRUE AND age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE",
+		"missing": "FALSE",
+		"factName": "sp_evaluate_adult",
+		"factValue": true,
+		"priority": 5,
+		"description": "Evaluation of Streptococcus pneumoniae vaccination is recommended for risks of heart, lung or kidney diseases and for patients with transplantations."
+	},
+	{
+		"condition": "_sp_necessary_adult = TRUE AND _sp_evaluate_adult = NOT TRUE",
+		"missing": "FALSE",
+		"factName": "sp_vaccinate_adult",
+		"factValue": true,
+		"priority": 10,
+		"description": "Vaccination against Streptococcus pneumoniae is recommended for risks of liver, immune, metabolism, spleen or blood diseases and for patients with skull fracture or cochloear implant."
+	},
+	{
+		"condition": "r1237576009 = TRUE AND d16814004_nr_of_doses < 4 AND age_in_months < 12",
+		"missing": "FALSE",
+		"factName": "sp_premature_birth",
+		"factValue": true,
+		"priority": 5,
+		"description": "Premature born children need 4 vaccination doses against Streptococcus pneumoniae."
+	},
+	{
+		"condition": "d16814004_nr_of_doses < 1 AND age_in_months >=3 AND age_in_months <= 11",
+		"missing": "FALSE",
+		"factName": "sp_necessary_3_doses",
+		"factValue": true,
+		"priority": 5,
+		"description": "For yet unvaccinated children between 3 and 11 months, three doses of vaccination doses against Streptococcus pneumoniae are recommended."
+	},
+	{
+		"condition": "d16814004_nr_of_doses < 1 AND age_in_months >=12 AND age_in_months <= 23",
+		"missing": "FALSE",
+		"factName": "sp_necessary_2_doses",
+		"factValue": true,
+		"priority": 5,
+		"description": "For yet unvaccinated children between 12 and 23 months, two doses of vaccination doses against Streptococcus pneumoniae are recommended."
+	},
+	{
+		"condition": "d16814004_nr_of_doses < 1 AND age >= 2 and age < 5",
+		"missing": "FALSE",
+		"factName": "sp_necessary_1_doses",
+		"factValue": true,
+		"priority": 5,
+		"description": "For yet unvaccinated children between the age of 2 and 5, one dose of vaccination doses against Streptococcus pneumoniae is recommended."
 	}
   ]
