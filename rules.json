@@ -201,5 +201,32 @@
 		"factValue": true,
 		"priority": 10,
 		"description": "For children between 1 and 6 years, the FSME vaccination should be individually evaluated."
+	},
+	{
+		"_comment": "Section for Rabies."
+	},
+	{
+		"condition": "r1237024002 = TRUE OR r265940000 = TRUE",
+		"missing": "FALSE",
+		"factName": "_rabies_criteria",
+		"factValue": true,
+		"priority": 5,
+		"description": "Criterias for rabies vaccination are met for people that have increased risk of exposition or that work in vetenary care."
+	},
+	{
+		"condition": "_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = NOT TRUE",
+		"missing": "FALSE",
+		"factName": "rabies_recommended_2doses",
+		"factValue": true,
+		"priority": 10,
+		"description": "For people that meet the rabies vaccination criteria and that have no disorder of immune function and have not completed the vaccination, two doses are recommended (28 days apart)."
+	},
+	{
+		"condition": "_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = TRUE",
+		"missing": "FALSE",
+		"factName": "rabies_recommended_3doses",
+		"factValue": true,
+		"priority": 10,
+		"description": "For people that meet the rabies vaccination criteria and that have a disorder of immune function and have not completed the vaccination, three doses are recommended (on day 0, 7 and 21–28)."
 	}
   ]
