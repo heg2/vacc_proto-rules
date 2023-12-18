@@ -3,32 +3,32 @@
 		"_comment": "Section for Dyphteria, Tetanus and Pertussis for children."
 	},
 	{
-	  "condition": "age_in_months >= 2 AND d76902006_nr_of_doses = 0 AND d27836007_nr_of_doses = 0 AND d398102009_nr_of_doses = 0",
-	  "factName": "needs_tetanus_0",
-	  "factValue": true,
-	  "priority": 10,
-	  "description": "Person has not had any DTP-Shot and is old enough to have some."
+		"condition": "age_in_months >= 2 AND d76902006_nr_of_doses = 0 AND d27836007_nr_of_doses = 0 AND d398102009_nr_of_doses = 0",
+		"factName": "needs_tetanus_0",
+		"factValue": true,
+		"priority": 10,
+		"description": "Person has not had any DTP-Shot and is old enough to have some."
 	},
 	{
-	  "condition": "age_in_months >= 4 AND d76902006_nr_of_doses = 1 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 1 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 1 AND d398102009_completed = \"FALSE\"",
-	  "factName": "needs_tetanus_1",
-	  "factValue": true,
-	  "priority": 10,
-	  "description": "Person has had his first DTP shot and is ready for the second shot."
+		"condition": "age_in_months >= 4 AND d76902006_nr_of_doses = 1 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 1 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 1 AND d398102009_completed = \"FALSE\"",
+		"factName": "needs_tetanus_1",
+		"factValue": true,
+		"priority": 10,
+		"description": "Person has had his first DTP shot and is ready for the second shot."
 	},
 	{
-	  "condition": "age_in_months >= 12 AND d76902006_nr_of_doses = 2 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 2 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 2 AND d398102009_completed = \"FALSE\"",
-	  "factName": "needs_tetanus_2",
-	  "factValue": true,
-	  "priority": 10,
-	  "description": "Person has had his first two DTP shots and is ready for the third shot."
+		"condition": "age_in_months >= 12 AND d76902006_nr_of_doses = 2 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 2 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 2 AND d398102009_completed = \"FALSE\"",
+		"factName": "needs_tetanus_2",
+		"factValue": true,
+		"priority": 10,
+		"description": "Person has had his first two DTP shots and is ready for the third shot."
 	},
 	{
-	  "condition": "age >= 4 AND age <= 7 AND d76902006_completed = \"TRUE\" AND d27836007_completed = \"TRUE\" AND d398102009_completed = \"TRUE\"",
-	  "factName": "needs_child_tetanus_refresh",
-	  "factValue": true,
-	  "priority": 10,
-	  "description": "The patient is ready for a refresh DTP shot."
+		"condition": "age >= 4 AND age <= 7 AND d76902006_completed = \"TRUE\" AND d27836007_completed = \"TRUE\" AND d398102009_completed = \"TRUE\"",
+		"factName": "needs_child_tetanus_refresh",
+		"factValue": true,
+		"priority": 10,
+		"description": "The patient is ready for a refresh DTP shot."
 	},
 	{ 
 		"_comment": "Section for Tetanus refresh vaccinatios after injury"
@@ -128,12 +128,12 @@
 		"description": "Vaccination against Streptococcus pneumoniae is recommended for risks of liver, immune, metabolism, spleen or blood diseases and for patients with skull fracture or cochloear implant."
 	},
 	{
-		"condition": "_sp_necessary_adult = NOT TRUE AND age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE",
+		"condition": "_sp_necessary_adult = NOT TRUE AND age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE OR r1237029007 = TRUE",
 		"missing": "FALSE",
 		"factName": "sp_evaluate_adult",
 		"factValue": true,
 		"priority": 5,
-		"description": "Evaluation of Streptococcus pneumoniae vaccination is recommended for risks of heart, lung or kidney diseases and for patients with transplantations."
+		"description": "Evaluation of Streptococcus pneumoniae vaccination is recommended for risks of heart, lung or kidney diseases and for patients with transplantations. Also for people with increased risk of exposition a vaccination should be evaluated (see Swiss Vaccionation Plan)"
 	},
 	{
 		"condition": "_sp_necessary_adult = TRUE AND _sp_evaluate_adult = NOT TRUE",
@@ -174,5 +174,32 @@
 		"factValue": true,
 		"priority": 5,
 		"description": "For yet unvaccinated children between the age of 2 and 5, one dose of vaccination doses against Streptococcus pneumoniae is recommended."
+	},
+	{
+		"_comment": "Section for FSME."
+	},
+	{
+		"condition": "r1237021005 = TRUE AND r72291000195105 = TRUE",
+		"missing": "FALSE",
+		"factName": "_fsme_criteria",
+		"factValue": true,
+		"priority": 5,
+		"description": "For people reside in Switzerland (except Ticino and Geneva) and have a risk of exposition, vaccination against FSME is recommended."
+	},
+	{
+		"condition": "_fsme_criteria = TRUE AND age >= 6 AND (d712986001_completed = FALSE OR d712986001_last_dose > 3650)",
+		"missing": "FALSE",
+		"factName": "fsme_recommended",
+		"factValue": true,
+		"priority": 10,
+		"description": "FSME vaccination is recommended for people over 6 years if the criteria are given and the vaccination was not completed or is older than 10 years."
+	},
+	{
+		"condition": "_fsme_criteria = TRUE AND age < 6  AND age >= 1 AND d712986001_completed = FALSE",
+		"missing": "FALSE",
+		"factName": "fsme_evaluate",
+		"factValue": true,
+		"priority": 10,
+		"description": "For children between 1 and 6 years, the FSME vaccination should be individually evaluated."
 	}
   ]
