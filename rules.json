@@ -1,16 +1,119 @@
-[ 
-	{
-		"condition": "v268_completed",
-		"factName": "measles_completed",
-		"factValue": true,
-		"priority": 10,
-		"description": "The patient has his MMR-II measles vaccine completed"
+[
+	{ 
+		"_comment": "Section for Dyphteria, Tetanus and Pertussis for children."
 	},
 	{
-		"condition": "NOT v683_completed",
-		"factName": "fsme_not_completed",
+	  "condition": "age_in_months >= 2 AND d76902006_nr_of_doses = 0 AND d27836007_nr_of_doses = 0 AND d398102009_nr_of_doses = 0",
+	  "factName": "needs_tetanus_0",
+	  "factValue": true,
+	  "priority": 10,
+	  "description": "Person has not had any DTP-Shot and is old enough to have some."
+	},
+	{
+	  "condition": "age_in_months >= 4 AND d76902006_nr_of_doses = 1 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 1 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 1 AND d398102009_completed = \"FALSE\"",
+	  "factName": "needs_tetanus_1",
+	  "factValue": true,
+	  "priority": 10,
+	  "description": "Person has had his first DTP shot and is ready for the second shot."
+	},
+	{
+	  "condition": "age_in_months >= 12 AND d76902006_nr_of_doses = 2 AND d76902006_completed = \"FALSE\" AND d27836007_nr_of_doses = 2 AND d27836007_completed = \"FALSE\" AND d398102009_nr_of_doses = 2 AND d398102009_completed = \"FALSE\"",
+	  "factName": "needs_tetanus_2",
+	  "factValue": true,
+	  "priority": 10,
+	  "description": "Person has had his first two DTP shots and is ready for the third shot."
+	},
+	{
+	  "condition": "age >= 4 AND age <= 7 AND d76902006_completed = \"TRUE\" AND d27836007_completed = \"TRUE\" AND d398102009_completed = \"TRUE\"",
+	  "factName": "needs_child_tetanus_refresh",
+	  "factValue": true,
+	  "priority": 10,
+	  "description": "The patient is ready for a refresh DTP shot."
+	},
+	{ 
+		"_comment": "Section for Tetanus refresh vaccinatios after injury"
+	},
+	{
+		"condition": "age >= 8 AND age <= 15",
+		"factName": "is_teenager_tetanus",
+		"factValue": true,
+		"factNameElse": "is_teenager_tetanus",
+		"factValueElse": false,
+		"priority": 5,
+		"description": "Persons from 8 to 15 years are considered teenagers in the Tetanus scenario"
+	},
+	{
+		"condition": "age >= 16 AND age <= 25",
+		"factName": "is_young_adult_tetanus",
+		"factValue": true,
+		"priority": 5,
+		"description": "Persons from 16 to 25 years are considered adults in the Tetanus scenario"
+	},
+	{
+		"condition": "age >= 64",
+		"factName": "is_senior_tetanus",
+		"factValue": true,
+		"priority": 5,
+		"description": "Persons older than 64 years are considered senior in the Tetanus scenario"
+	},
+	{
+		"condition": "is_teenager_tetanus AND d76902006_last_dose > 1825 OR is_young_adult_tetanus AND d76902006_last_dose > 3650 OR is_adult_tetanus AND d76902006_last_dose > 7300 OR is_senior_tetanus AND d76902006_last_dose > 3650",
+		"factName": "tetanus_refresh_light_injury",
 		"factValue": true,
 		"priority": 10,
-		"description": "The patient has his FSME-IMMUN 0.25 ML JUNIOR vaccine NOT completed"
+		"description": "Refreshing the tetanus vaccination is indicated if the Patient has a light injury."
+	},
+	{
+		"condition": "(is_teenager_tetanus = TRUE OR is_young_adult_tetanus = TRUE OR is_senior_tetanus = TRUE) AND d76902006_last_dose > 1825 OR is_adult_tetanus = TRUE AND d76902006_last_dose > 3650",
+		"factName": "tetanus_refresh_severe_injury",
+		"missing": "FALSE",
+		"factValue": true,
+		"priority": 10,
+		"description": "Refreshing the tetanus vaccination is indicated if the Patient has a severe injury."
+	},
+	{
+		"condition": "d76902006_last_dose = 'NULL' AND age >= 5",
+		"missing": "NULL",
+		"factName": "tetanus_needed_injury",
+		"factValue": true,
+		"priority": 10,
+		"description": "The patient does not have any tetanus vaccination, consider vaccinating if they are injured."
+	},
+	{
+		"_comment": "Section for Influenza."
+	},
+	{
+		"condition": "r56265001 = TRUE OR r19829001 = TRUE OR r235856003 = TRUE OR r51244008 = TRUE OR r90708001 = TRUE OR r75934005 = TRUE OR r737294004 = TRUE OR r414029004 = TRUE OR r77386006 = TRUE",
+		"missing": "FALSE",
+		"factName": "influenza_chronical",
+		"factValue": true,
+		"priority": 5,
+		"description": "The patient has one or more of the chronical conditions that are risk factors for influenza."
+	},
+	{
+		"condition": "r223366009 = TRUE OR r77386006 = TRUE OR r61254738003 = TRUE",
+		"missing": "FALSE",
+		"factName": "influenza_exposition",
+		"factValue": true,
+		"priority": 5,
+		"description": "The patient a higher risk of exposition to influenza."
+	},
+	{
+		"condition": "d719590007_last_dose = 'NULL' OR d719590007_last_dose > 365",
+		"missing": "NULL",
+		"factName": "influenza_expired",
+		"factValue": true,
+		"factNameElse": "influenza_expired",
+		"factValueElse": false,
+		"priority": 5,
+		"description": "The last INFLUENCA vaccination was more than a year ago."
+	},
+	{
+		"condition": "influenza_expired = TRUE AND (age >= 65 OR influenza_exposition = TRUE OR influenza_chronical = TRUE)",
+		"missing": "FALSE",
+		"factName": "influenza_exposition",
+		"factValue": true,
+		"priority": 10,
+		"description": "For this patient, an INFLUENCA vaccination is recommended, and the last shot was more than a year ago."
 	}
-]
+  ]
