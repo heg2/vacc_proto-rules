@@ -144,7 +144,7 @@
 		"description": "Vaccination against Streptococcus pneumoniae is recommended for risks of liver, immune, metabolism, spleen or blood diseases and for patients with skull fracture or cochloear implant."
 	},
 	{
-		"condition": "r1237576009 = TRUE AND d16814004_nr_of_doses < 4 AND age_in_months < 12",
+		"condition": "r1237576009 = TRUE AND d16814004_nr_of_doses < 4 AND age < 1",
 		"missing": "FALSE",
 		"factName": "sp_premature_birth",
 		"factValue": true,
