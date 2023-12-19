@@ -57,14 +57,14 @@
 		"description": "Persons older than 64 years are considered senior in the Tetanus scenario"
 	},
 	{
-		"condition": "x_is_teenager_tetanus AND d76902006_last_dose > 1825 OR _is_young_adult_tetanus AND d76902006_last_dose > 3650 OR _is_adult_tetanus AND d76902006_last_dose > 7300 OR _is_senior_tetanus AND d76902006_last_dose > 3650",
+		"condition": "x_is_teenager_tetanus AND d76902006_last_dose > 1825 OR x_is_young_adult_tetanus AND d76902006_last_dose > 3650 OR x_is_adult_tetanus AND d76902006_last_dose > 7300 OR x_is_senior_tetanus AND d76902006_last_dose > 3650",
 		"factName": "tetanus_refresh_light_injury",
 		"factValue": true,
 		"priority": 10,
 		"description": "Refreshing the tetanus vaccination is indicated if the Patient has a light injury."
 	},
 	{
-		"condition": "(_is_teenager_tetanus = TRUE OR _is_young_adult_tetanus = TRUE OR _is_senior_tetanus = TRUE) AND d76902006_last_dose > 1825 OR _is_adult_tetanus = TRUE AND d76902006_last_dose > 3650",
+		"condition": "(_is_teenager_tetanus = TRUE OR x_is_young_adult_tetanus = TRUE OR x_is_senior_tetanus = TRUE) AND d76902006_last_dose > 1825 OR x_is_adult_tetanus = TRUE AND d76902006_last_dose > 3650",
 		"factName": "tetanus_refresh_severe_injury",
 		"missing": "FALSE",
 		"factValue": true,
@@ -109,7 +109,7 @@
 		"description": "The last INFLUENCA vaccination was more than a year ago."
 	},
 	{
-		"condition": "x_influenza_expired = TRUE AND (age >= 65 OR _influenza_exposition = TRUE OR _influenza_chronical = TRUE)",
+		"condition": "x_influenza_expired = TRUE AND (age >= 65 OR x_influenza_exposition = TRUE OR x_influenza_chronical = TRUE)",
 		"missing": "FALSE",
 		"factName": "influenza_necessary",
 		"factValue": true,
@@ -136,7 +136,7 @@
 		"description": "Evaluation of Streptococcus pneumoniae vaccination is recommended for risks of heart, lung or kidney diseases and for patients with transplantations. Also for people with increased risk of exposition a vaccination should be evaluated (see Swiss Vaccionation Plan)"
 	},
 	{
-		"condition": "x_sp_necessary_adult = TRUE AND _sp_evaluate_adult = NOT TRUE",
+		"condition": "x_sp_necessary_adult = TRUE AND x_sp_evaluate_adult = NOT TRUE",
 		"missing": "FALSE",
 		"factName": "sp_vaccinate_adult",
 		"factValue": true,
