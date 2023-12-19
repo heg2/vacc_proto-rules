@@ -23,25 +23,35 @@ Erforderlich sind folgende Properties, was die minimale Regel wie folgt definier
 interface rule
   {
     // describe condition for adding new fact to system
-    condition: string      
+    condition: string
+
     // name of new fact, which will be added if condition is met. no spaces allowed.
-    factName: string,      
+    factName: string,
+
     // value of new fact, which will be added if condition is met
-    factValue: string | number | boolean 
+    factValue: string | number | boolean
+
     // short fact description for logging
     description?: string
+
     // rule priority, number, optional, default value is 1. low numbers are processed first
-    priority?: number      
+    priority?: number
+
     // optional field with default values for missing facts. not working with precondition
-    missing? string,      
+    missing? string,
+
     // option string field with the same syntax as condition. 
-    precondition?: string, 
-     // name of new fact, which will be added if condition is not met. no spaces allowed. needs factValueElse if present.
-    factNameElse?: string  
+    precondition?: string,
+
+    // name of new fact, which will be added if condition is not met. no spaces allowed. needs factValueElse if present.
+    factNameElse?: string
+
     // value of new fact, which will be added if condition is not met. needs factNameElse if present.
-    factValueElse?: string | number | boolean 
+    factValueElse?: string | number | boolean
+
     // Each value dictates when to halt the evaluation of subsequent rules as documented in the link above
-    final?: 1 | 2 | 3      
+    final?: 1 | 2 | 3
+
     // after new rule adding, rules check procedure starts automatically (default: true)
     isTrigger?: boolean    
   }
