@@ -51,4 +51,4 @@ interface rule
 - Fehlende Fakten werden per default als "TRUE" angenommen. Möchte man das nicht, muss man in der Regel den Parameter `missing: "FALSE"` setzen.
 - Abgekürzte Schreibweisen gehen nicht: `fact1 OR fact2` ist nicht das selbe wie `fact1 = TRUE OR fact2 = TRUE`.
 
-Konvention für "Helferfakten", die nicht im Endergebnis aufscheinen sollen: Deren Faktnamen beginnen mit einem `_`, und werden so bei der Anzeige ausgefiltert.
+Konvention für "Helferfakten", die nicht im Endergebnis aufscheinen sollen: Deren Faktnamen beginnen mit einem `x_`, und werden so bei der Anzeige ausgefiltert.

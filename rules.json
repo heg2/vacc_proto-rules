@@ -35,29 +35,29 @@
 	},
 	{
 		"condition": "age >= 8 AND age <= 15",
-		"factName": "_is_teenager_tetanus",
+		"factName": "x_is_teenager_tetanus",
 		"factValue": true,
-		"factNameElse": "_is_teenager_tetanus",
+		"factNameElse": "x_is_teenager_tetanus",
 		"factValueElse": false,
 		"priority": 5,
 		"description": "Persons from 8 to 15 years are considered teenagers in the Tetanus scenario"
 	},
 	{
 		"condition": "age >= 16 AND age <= 25",
-		"factName": "_is_young_adult_tetanus",
+		"factName": "x_is_young_adult_tetanus",
 		"factValue": true,
 		"priority": 5,
 		"description": "Persons from 16 to 25 years are considered adults in the Tetanus scenario"
 	},
 	{
 		"condition": "age >= 64",
-		"factName": "_is_senior_tetanus",
+		"factName": "x_is_senior_tetanus",
 		"factValue": true,
 		"priority": 5,
 		"description": "Persons older than 64 years are considered senior in the Tetanus scenario"
 	},
 	{
-		"condition": "_is_teenager_tetanus AND d76902006_last_dose > 1825 OR _is_young_adult_tetanus AND d76902006_last_dose > 3650 OR _is_adult_tetanus AND d76902006_last_dose > 7300 OR _is_senior_tetanus AND d76902006_last_dose > 3650",
+		"condition": "x_is_teenager_tetanus AND d76902006_last_dose > 1825 OR _is_young_adult_tetanus AND d76902006_last_dose > 3650 OR _is_adult_tetanus AND d76902006_last_dose > 7300 OR _is_senior_tetanus AND d76902006_last_dose > 3650",
 		"factName": "tetanus_refresh_light_injury",
 		"factValue": true,
 		"priority": 10,
@@ -85,7 +85,7 @@
 	{
 		"condition": "r56265001 = TRUE OR r19829001 = TRUE OR r235856003 = TRUE OR r51244008 = TRUE OR r90708001 = TRUE OR r75934005 = TRUE OR r737294004 = TRUE OR r414029004 = TRUE OR r77386006 = TRUE",
 		"missing": "FALSE",
-		"factName": "_influenza_chronical",
+		"factName": "x_influenza_chronical",
 		"factValue": true,
 		"priority": 5,
 		"description": "The patient has one or more of the chronical conditions that are risk factors for influenza."
@@ -93,7 +93,7 @@
 	{
 		"condition": "r223366009 = TRUE OR r77386006 = TRUE OR r61254738003 = TRUE",
 		"missing": "FALSE",
-		"factName": "_influenza_exposition",
+		"factName": "x_influenza_exposition",
 		"factValue": true,
 		"priority": 5,
 		"description": "The patient a higher risk of exposition to influenza."
@@ -101,7 +101,7 @@
 	{
 		"condition": "d719590007_last_dose = 'NULL' OR d719590007_last_dose > 365",
 		"missing": "NULL",
-		"factName": "_influenza_expired",
+		"factName": "x_influenza_expired",
 		"factValue": true,
 		"factNameElse": "influenza_expired",
 		"factValueElse": false,
@@ -109,7 +109,7 @@
 		"description": "The last INFLUENCA vaccination was more than a year ago."
 	},
 	{
-		"condition": "_influenza_expired = TRUE AND (age >= 65 OR _influenza_exposition = TRUE OR _influenza_chronical = TRUE)",
+		"condition": "x_influenza_expired = TRUE AND (age >= 65 OR _influenza_exposition = TRUE OR _influenza_chronical = TRUE)",
 		"missing": "FALSE",
 		"factName": "influenza_necessary",
 		"factValue": true,
@@ -122,13 +122,13 @@
 	{
 		"condition": "age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE",
 		"missing": "FALSE",
-		"factName": "_sp_necessary_adult",
+		"factName": "x_sp_necessary_adult",
 		"factValue": true,
 		"priority": 4,
 		"description": "Vaccination against Streptococcus pneumoniae is recommended for risks of liver, immune, metabolism, spleen or blood diseases and for patients with skull fracture or cochloear implant."
 	},
 	{
-		"condition": "_sp_necessary_adult = NOT TRUE AND age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE OR r1237029007 = TRUE",
+		"condition": "x_sp_necessary_adult = NOT TRUE AND age > 5 AND r56265001 = TRUE OR r19829001 = TRUE OR r90708001 = TRUE OR r414027002 = TRUE OR r1237029007 = TRUE",
 		"missing": "FALSE",
 		"factName": "sp_evaluate_adult",
 		"factValue": true,
@@ -136,7 +136,7 @@
 		"description": "Evaluation of Streptococcus pneumoniae vaccination is recommended for risks of heart, lung or kidney diseases and for patients with transplantations. Also for people with increased risk of exposition a vaccination should be evaluated (see Swiss Vaccionation Plan)"
 	},
 	{
-		"condition": "_sp_necessary_adult = TRUE AND _sp_evaluate_adult = NOT TRUE",
+		"condition": "x_sp_necessary_adult = TRUE AND _sp_evaluate_adult = NOT TRUE",
 		"missing": "FALSE",
 		"factName": "sp_vaccinate_adult",
 		"factValue": true,
@@ -181,13 +181,13 @@
 	{
 		"condition": "r1237021005 = TRUE AND r72291000195105 = TRUE",
 		"missing": "FALSE",
-		"factName": "_fsme_criteria",
+		"factName": "x_fsme_criteria",
 		"factValue": true,
 		"priority": 5,
 		"description": "For people reside in Switzerland (except Ticino and Geneva) and have a risk of exposition, vaccination against FSME is recommended."
 	},
 	{
-		"condition": "_fsme_criteria = TRUE AND age >= 6 AND (d712986001_completed = FALSE OR d712986001_last_dose > 3650)",
+		"condition": "x_fsme_criteria = TRUE AND age >= 6 AND (d712986001_completed = FALSE OR d712986001_last_dose > 3650)",
 		"missing": "FALSE",
 		"factName": "fsme_recommended",
 		"factValue": true,
@@ -195,7 +195,7 @@
 		"description": "FSME vaccination is recommended for people over 6 years if the criteria are given and the vaccination was not completed or is older than 10 years."
 	},
 	{
-		"condition": "_fsme_criteria = TRUE AND age < 6  AND age >= 1 AND d712986001_completed = FALSE",
+		"condition": "x_fsme_criteria = TRUE AND age < 6  AND age >= 1 AND d712986001_completed = FALSE",
 		"missing": "FALSE",
 		"factName": "fsme_evaluate",
 		"factValue": true,
@@ -208,13 +208,13 @@
 	{
 		"condition": "r1237024002 = TRUE OR r265940000 = TRUE",
 		"missing": "FALSE",
-		"factName": "_rabies_criteria",
+		"factName": "x_rabies_criteria",
 		"factValue": true,
 		"priority": 5,
 		"description": "Criterias for rabies vaccination are met for people that have increased risk of exposition or that work in vetenary care."
 	},
 	{
-		"condition": "_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = NOT TRUE",
+		"condition": "x_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = FALSE",
 		"missing": "FALSE",
 		"factName": "rabies_recommended_2doses",
 		"factValue": true,
@@ -222,7 +222,7 @@
 		"description": "For people that meet the rabies vaccination criteria and that have no disorder of immune function and have not completed the vaccination, two doses are recommended (28 days apart)."
 	},
 	{
-		"condition": "_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = TRUE",
+		"condition": "x_rabies_criteria = TRUE AND d14168008_completed = FALSE AND r414029004 = TRUE",
 		"missing": "FALSE",
 		"factName": "rabies_recommended_3doses",
 		"factValue": true,
