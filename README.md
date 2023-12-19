@@ -13,7 +13,7 @@ Es stehen folgende Fakten zur Verfügung:
 | dXXX_number_of_doses| integer, NULL | Wurde die Impfung zur Zielerkrankung komplettisiert? |
 | rXXX | "TRUE", "FALSE" | Trifft das Risiko für den\*die Patient\*in zu? |
 
-`vXXX` steht für Impfungen, wobei XXX durch den Wert des coding.code erstetzt werden muss. Analog für dXXX für Zielerkrankungen und rXXX für Risiken.
+`vXXX` steht für Impfungen, wobei XXX durch den Wert des coding.code erstetzt werden muss. Analog für `dXXX` für Zielerkrankungen und `rXXX` für Risiken.
 
 ### Regeln
 Wie die Regeln aufgebaut sein können, ist bei [stugna-es](https://www.npmjs.com/package/stugna-es#ruleadd) dokumentiert.
